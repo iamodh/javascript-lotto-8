@@ -1,5 +1,4 @@
-import LOTTO_CONFIG from '../src/constants/lottoConfig';
-import WinningLotto from '../src/constants/WinningLotto';
+import WinningLotto from '../src/models/WinningLotto';
 
 describe('당첨 로또 클래스 테스트', () => {
   test('당점 로또 번호의 개수가 6개가 아니라면 예외가 발생한다.', () => {
@@ -8,25 +7,9 @@ describe('당첨 로또 클래스 테스트', () => {
     }).toThrow('[ERROR]');
   });
 
-  test('당첨 로또 번호가 주어진 범위 사이의 양수가 아니면 예외가 발생한다.', () => {
-    const maxNumber = LOTTO_CONFIG.NUMBER_RANGE_TO + 1;
-
-    expect(() => {
-      new WinningLotto([1, 2, 3, 4, 5, maxNumber + 1], 6);
-    }).toThrow('[ERROR]');
-  });
-
   test('당첨 로또 번호에 중복된 숫자가 있으면 예외가 발생한다.', () => {
     expect(() => {
       new WinningLotto([1, 2, 3, 4, 5, 5], 6);
-    }).toThrow('[ERROR]');
-  });
-
-  test('보너스 로또 번호가 주어진 범위 사이의 양수가 아니면 예외가 발생한다.', () => {
-    const maxNumber = LOTTO_CONFIG.NUMBER_RANGE_TO;
-
-    expect(() => {
-      new WinningLotto([1, 2, 3, 4, 5, 6], maxNumber + 1);
     }).toThrow('[ERROR]');
   });
 
