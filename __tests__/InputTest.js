@@ -3,30 +3,30 @@ import { mockQuestions } from '../src/utils/mocks';
 import Input from '../src/views/Input';
 
 describe('입력 클래스 테스트', () => {
-  test('소지 금액을 입력 받아 숫자로 변환 후 반환한다.', async () => {
+  test('구입 금액을 입력 받아 숫자로 변환 후 반환한다.', async () => {
     mockQuestions(['3000']);
 
     const input = new Input();
-    const investment = await input.getInvestmentInput();
+    const investment = await input.getInvestment();
 
     expect(investment).toBe(3000);
   });
 
-  test('입력된 소지 금액이 양의 정수가 아니라면 예외가 발생한다.', () => {
+  test('입력된 구입 금액이 양의 정수가 아니라면 예외가 발생한다.', () => {
     mockQuestions(['0']);
 
     const input = new Input();
 
     expect(async () => {
-      await input.getInvestmentInput();
-    }).toThrow('[ERROR]');
+      await input.getInvestment();
+    }).rejects.toThrow('[ERROR]');
   });
 
   test('당첨 로또의 번호들을 입력 받아 숫자 배열로 변환 후 반환한다.', async () => {
     mockQuestions(['1,2,3,4,5,6']);
 
     const input = new Input();
-    const numbers = await input.getWinningLottoNumbers();
+    const numbers = await input.getWinningNumbers();
 
     expect(numbers).toEqual([1, 2, 3, 4, 5, 6]);
   });
@@ -37,8 +37,8 @@ describe('입력 클래스 테스트', () => {
     const input = new Input();
 
     expect(async () => {
-      await input.getWinningLottoNumbers();
-    }).toThrow('[ERROR]');
+      await input.getWinningNumbers();
+    }).rejects.toThrow('[ERROR]');
   });
 
   test('입력된 당첨 로또 번호 중 로또 번호의 범위에 포함되지 않는 번호가 있다면 예외가 발생한다.', () => {
@@ -48,8 +48,8 @@ describe('입력 클래스 테스트', () => {
     const input = new Input();
 
     expect(async () => {
-      await input.getWinningLottoNumbers();
-    }).toThrow('[ERROR]');
+      await input.getWinningNumbers();
+    }).rejects.toThrow('[ERROR]');
   });
 
   test('당첨 로또의 보너스 번호를 입력 받아 변환 후 반환한다.', async () => {
@@ -66,7 +66,7 @@ describe('입력 클래스 테스트', () => {
 
     expect(async () => {
       await input.getBonusNumber();
-    }).toThrow('[ERROR]');
+    }).rejects.toThrow('[ERROR]');
   });
 
   test('당첨 로또의 보너스 번호가 로또 번호의 범위에 포함되지 않는다면 예외가 발생한다.', () => {
@@ -77,6 +77,6 @@ describe('입력 클래스 테스트', () => {
 
     expect(async () => {
       await input.getBonusNumber();
-    }).toThrow('[ERROR]');
+    }).rejects.toThrow('[ERROR]');
   });
 });
