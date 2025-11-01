@@ -1,4 +1,4 @@
-import LOTTO_CONFIG from '../src/constants/lottoConfig';
+import { LOTTO_CONFIG } from '../src/constants/lottoConfig';
 import User from '../src/models/User';
 
 describe('사용자 클래스 테스트', () => {

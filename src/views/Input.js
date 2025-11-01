@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import LOTTO_CONFIG from '../constants/lottoConfig';
+import { LOTTO_CONFIG } from '../constants/lottoConfig';
 
 class Input {
   async getInvestment() {
