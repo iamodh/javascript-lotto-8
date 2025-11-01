@@ -1,5 +1,5 @@
 import { PRIZE_AMOUNT } from '../src/constants/lottoConfig';
-import Calculator from '../src/models/Calculater';
+import Calculator from '../src/models/Calculator';
 
 describe('계산기 클래스 테스트', () => {
   test('당첨 결과에 따른 수익 금액을 계산하고 수익률을 반환한다.', () => {
@@ -15,7 +15,7 @@ describe('계산기 클래스 테스트', () => {
     ];
 
     const PROFIT = PRIZE_AMOUNT[4] * 2;
-    const PROFIT_RATE = ((PROFIT / INVESTMENT) * 100).toFixed(1);
+    const PROFIT_RATE = Math.round((PROFIT / INVESTMENT) * 100 * 10) / 10;
     const calculator = new Calculator(INVESTMENT, WINNING_RESULT);
 
     expect(calculator.getProfitRate()).toBe(PROFIT_RATE);

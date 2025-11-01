@@ -13,7 +13,8 @@ class Calculator {
     const profit = this.#calculateProfit();
     if (profit === 0) return 0;
 
-    const profitRate = ((profit / this.#investment) * 100).toFixed(1);
+    // 소숫점 반환 결과를 Number로 저장하기 위함
+    const profitRate = Math.round((profit / this.#investment) * 100 * 10) / 10;
 
     return profitRate;
   }
