@@ -1,30 +1,31 @@
 class Checker {
   #winningLotto;
-  #bonusNumber;
-  #lottos = [];
+  #lottos;
+
   #result = Array.from({ length: 5 }, () => new Array());
 
-  constructor(winningLotto, bonusNumber, lottos) {
+  constructor(winningLotto, lottos) {
     this.#winningLotto = winningLotto;
-    this.#bonusNumber = bonusNumber;
     this.#lottos = lottos;
   }
 
   checkAllLottos() {
     for (const lotto of this.#lottos) {
-      const prize = this.#check(lotto);
+      const prize = this.#checkNumbers(lotto.getNumbers());
 
       if (prize !== null && prize <= 5) {
-        this.#result[prize - 1].push(lotto);
+        this.#result[prize - 1].push(lotto.getNumbers());
       }
     }
+  }
 
+  getResult() {
     return this.#result;
   }
 
-  #check(numbers) {
+  #checkNumbers(numbers) {
     const intersectoinCounts = this.#getIntersectionCounts(
-      this.#winningLotto,
+      this.#winningLotto.getNumbers(),
       numbers
     );
 
@@ -32,7 +33,7 @@ class Checker {
       case 6:
         return 1;
       case 5: {
-        if (numbers.includes(this.#bonusNumber)) {
+        if (numbers.includes(this.#winningLotto.getBonusNumber())) {
           return 2;
         }
         return 3;
