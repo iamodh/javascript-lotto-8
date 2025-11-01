@@ -19,6 +19,10 @@ class Lotto {
       throw new Error('[ERROR] 로또 번호는 중복이 불가합니다.');
     }
   }
+
+  getNumbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;

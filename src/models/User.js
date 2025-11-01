@@ -39,6 +39,9 @@ class User {
   getPurchasedLottos() {
     return this.#lottos;
   }
+  getInvestment() {
+    return this.#investment;
+  }
 }
 
 export default User;

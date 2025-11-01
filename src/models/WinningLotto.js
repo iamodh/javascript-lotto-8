@@ -15,6 +15,10 @@ class WinningLotto extends Lotto {
       throw new Error('[ERROR] 보너스 번호는 로또 번호와 중복이 불가합니다.');
     }
   }
+
+  getBonusNumber() {
+    return this.#bonusNumber;
+  }
 }
 
 export default WinningLotto;
