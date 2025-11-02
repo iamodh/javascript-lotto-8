@@ -1,7 +1,7 @@
-import Checker from '../src/models/Checker';
-import User from '../src/models/User';
-import WinningLotto from '../src/models/WinningLotto';
-import { mockRandoms } from '../src/utils/mocks';
+import { mockRandoms } from '/src/utils/mocks';
+import User from '/src/models/entities/User';
+import WinningLotto from '/src/models/entities/WinningLotto';
+import Checker from '/src/models/services/Checker';
 
 describe('당첨 확인 클래스 테스트', () => {
   test('사용자가 구매한 모든 로또의 당첨을 확인하고 당첨 결과 배열을 반환한다.', () => {

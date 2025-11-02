@@ -1,6 +1,6 @@
-import { LOTTO_CONFIG } from '../src/constants/lottoConfig';
-import { mockQuestions } from '../src/utils/mocks';
-import Input from '../src/views/Input';
+import { LOTTO_CONFIG } from '/src/constants/lottoConfig';
+import { mockQuestions } from '/src/utils/mocks';
+import Input from '/src/views/Input';
 
 describe('입력 클래스 테스트', () => {
   test('구입 금액을 입력 받아 숫자로 변환 후 반환한다.', async () => {

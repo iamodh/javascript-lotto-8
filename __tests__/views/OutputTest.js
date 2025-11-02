@@ -1,6 +1,6 @@
-import User from '../src/models/User';
-import { getLogSpy, mockRandoms } from '../src/utils/mocks';
-import Output from '../src/views/Output';
+import User from '/src/models/entities/User';
+import { getLogSpy, mockRandoms } from '/src/utils/mocks';
+import Output from '/src/views/Output';
 
 describe('출력 클래스 테스트', () => {
   test('구매한 로또들을 받아 각 번호를 오름차순으로 정렬한 후, 형식에 맞게 출력한다.', () => {

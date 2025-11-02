@@ -1,4 +1,4 @@
-import { PRIZE_AMOUNT } from '../constants/lottoConfig.js';
+import { PRIZE_AMOUNT } from '/src/constants/lottoConfig.js';
 
 class Calculator {
   getProfitRate(investment, winningResult) {

@@ -1,4 +1,4 @@
-import Lotto from './Lotto.js';
+import Lotto from '/src/models/entities/Lotto.js';
 
 class WinningLotto extends Lotto {
   #bonusNumber;

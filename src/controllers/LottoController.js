@@ -1,9 +1,9 @@
-import User from '../models/User.js';
-import WinningLotto from '../models/WinningLotto.js';
-import Checker from '../models/Checker.js';
-import Calculator from '../models/Calculator.js';
-import Input from '../views/Input.js';
-import Output from '../views/Output.js';
+import Calculator from '/src/models/services/Calculator';
+import Checker from '/src/models/services/Checker';
+import User from '/src/models/entities/User.js';
+import WinningLotto from '/src/models/entities/WinningLotto.js';
+import Input from '/src/views/Input.js';
+import Output from '/src/views/Output.js';
 
 class LottoController {
   #input;

@@ -1,5 +1,5 @@
-import { PRIZE_AMOUNT } from '../src/constants/lottoConfig';
-import Calculator from '../src/models/Calculator';
+import { PRIZE_AMOUNT } from '/src/constants/lottoConfig';
+import Calculator from '/src/models/services/Calculator';
 
 describe('계산기 클래스 테스트', () => {
   test('당첨 결과에 따른 수익 금액을 계산하고 수익률을 반환한다.', () => {
