@@ -3,24 +3,24 @@ import { LOTTO_CONFIG } from '/src/constants/lottoConfig.js';
 import Lotto from '/src/models/entities/Lotto.js';
 
 class User {
-  #investment;
+  #purchasePrice;
   #lottos = [];
 
-  constructor(investment) {
-    this.#validateDivisibility(investment);
-    this.#investment = investment;
+  constructor(purchasePrice) {
+    this.#validatePrice(purchasePrice);
+    this.#purchasePrice = purchasePrice;
   }
 
-  #validateDivisibility(investment) {
-    if (investment % LOTTO_CONFIG.PRICE !== 0) {
+  #validatePrice(purchasePrice) {
+    if (purchasePrice % LOTTO_CONFIG.PRICE !== 0) {
       throw new Error(
-        '[ERROR] 투자 금액은 로또의 가격으로 나누어 떨어져야 합니다.'
+        '[ERROR] 구매 금액은 로또의 가격으로 나누어 떨어져야 합니다.'
       );
     }
   }
 
   purchaseLottos() {
-    const quantity = this.#investment / LOTTO_CONFIG.PRICE;
+    const quantity = this.#purchasePrice / LOTTO_CONFIG.PRICE;
     for (let i = 0; i < quantity; i++) {
       const randomNumbers = this.#getRandomLottoNumbers();
 
@@ -39,8 +39,9 @@ class User {
   getPurchasedLottos() {
     return this.#lottos;
   }
-  getInvestment() {
-    return this.#investment;
+
+  getPurchasePrice() {
+    return this.#purchasePrice;
   }
 }
 
