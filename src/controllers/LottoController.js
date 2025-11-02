@@ -2,40 +2,48 @@ import User from '../models/User.js';
 import WinningLotto from '../models/WinningLotto.js';
 import Checker from '../models/Checker.js';
 import Calculator from '../models/Calculator.js';
+import Input from '../views/Input.js';
+import Output from '../views/Output.js';
 
 class LottoController {
-  #user;
-  #winningLotto;
-  #result = Array.from({ length: 5 }, () => new Array());
+  #input;
+  #output;
 
-  constructor(investment, winningNumbers, bonusNumber) {
-    this.#user = new User(investment);
-    this.#winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+  constructor() {
+    this.#input = new Input();
+    this.#output = new Output();
   }
 
-  purchaseAndCheck() {
-    this.#user.purchaseLottos();
+  async start() {
+    try {
+      const investment = await this.#input.getInvestment();
 
-    const checker = new Checker(
-      this.#winningLotto,
-      this.#user.getPurchasedLottos()
-    );
+      const user = new User(investment);
+      user.purchaseLottos();
 
-    checker.checkAllLottos();
+      this.#output.printPurchasedLottos(user.getPurchasedLottos());
 
-    this.#result = checker.getResult();
-  }
+      const winningNumbers = await this.#input.getWinningNumbers();
+      const bonusNumber = await this.#input.getBonusNumber();
 
-  getResult() {
-    return this.#result;
-  }
+      const winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
-  getProfitRate() {
-    const calculator = new Calculator(this.#user.getInvestment(), this.#result);
+      const checker = new Checker(winningLotto, user.getPurchasedLottos());
 
-    const profitRate = calculator.getProfitRate();
+      checker.checkAllLottos();
 
-    return profitRate;
+      const result = checker.getResult();
+
+      this.#output.printWinningResults(result);
+
+      const calculator = new Calculator(user.getInvestment(), result);
+
+      const profitRate = calculator.getProfitRate();
+
+      this.#output.printProfitRate(profitRate);
+    } catch (error) {
+      this.#output.printError(error.message);
+    }
   }
 }
 
