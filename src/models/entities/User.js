@@ -1,6 +1,7 @@
 import { Random } from '@woowacourse/mission-utils';
 import { LOTTO_CONFIG } from '/src/constants/lottoConfig.js';
 import Lotto from '/src/models/entities/Lotto.js';
+import ERROR_MESSAGES from '/src/constants/errorMessages';
 
 class User {
   #purchasePrice;
@@ -13,9 +14,7 @@ class User {
 
   #validatePrice(purchasePrice) {
     if (purchasePrice % LOTTO_CONFIG.PRICE !== 0) {
-      throw new Error(
-        '[ERROR] 구매 금액은 로또의 가격으로 나누어 떨어져야 합니다.'
-      );
+      throw new Error(ERROR_MESSAGES.INVALID_PRICE);
     }
   }
 

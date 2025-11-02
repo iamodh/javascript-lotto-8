@@ -1,5 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { LOTTO_CONFIG } from '../constants/lottoConfig.js';
+import ERROR_MESSAGES from '/src/constants/errorMessages';
 
 class InputView {
   async getPurchasePrice() {
@@ -33,7 +34,7 @@ class InputView {
 
   #validateNumberPositive(number) {
     if (Number.isNaN(number) || !Number.isInteger(number) || number === 0) {
-      throw new Error('[ERROR] 양의 정수가 아닌 입력 값이 존재합니다.');
+      throw new Error(ERROR_MESSAGES.NUMBER_NOT_POSIRIVE);
     }
   }
 
@@ -44,9 +45,7 @@ class InputView {
       number < LOTTO_CONFIG.NUMBER_RANGE_FROM ||
       number > LOTTO_CONFIG.NUMBER_RANGE_TO
     ) {
-      throw new Error(
-        '[ERROR] 로또 번호의 범위에서 벗어난 입력 값이 존재합니다.'
-      );
+      throw new Error(ERROR_MESSAGES.NUMBER_NOT_IN_RANGE);
     }
   }
 }

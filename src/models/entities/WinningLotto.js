@@ -1,4 +1,5 @@
 import Lotto from '/src/models/entities/Lotto.js';
+import ERROR_MESSAGES from '/src/constants/errorMessages';
 
 class WinningLotto extends Lotto {
   #bonusNumber;
@@ -12,7 +13,7 @@ class WinningLotto extends Lotto {
 
   #validateBonusNumberDuplicates(numbers, bonusNumber) {
     if (numbers.includes(bonusNumber)) {
-      throw new Error('[ERROR] 보너스 번호는 로또 번호와 중복이 불가합니다.');
+      throw new Error(ERROR_MESSAGES.BONUS_NUMBER_DUPLICATES);
     }
   }
 
