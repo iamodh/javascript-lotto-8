@@ -16,8 +16,10 @@ describe('계산기 클래스 테스트', () => {
 
     const PROFIT = PRIZE_AMOUNT[4] * 2;
     const PROFIT_RATE = Math.round((PROFIT / INVESTMENT) * 100 * 10) / 10;
-    const calculator = new Calculator(INVESTMENT, WINNING_RESULT);
+    const calculator = new Calculator();
 
-    expect(calculator.getProfitRate()).toBe(PROFIT_RATE);
+    expect(calculator.getProfitRate(INVESTMENT, WINNING_RESULT)).toBe(
+      PROFIT_RATE
+    );
   });
 });
