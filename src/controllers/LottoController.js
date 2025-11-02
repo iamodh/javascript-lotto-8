@@ -8,42 +8,57 @@ import Output from '../views/Output.js';
 class LottoController {
   #input;
   #output;
+  #checker;
+  #calculator;
+  #user;
+  #winningLotto;
 
   constructor() {
     this.#input = new Input();
     this.#output = new Output();
+    this.#checker = new Checker();
+    this.#calculator = new Calculator();
   }
 
   async start() {
     try {
-      const investment = await this.#input.getInvestment();
-
-      const user = new User(investment);
-      user.purchaseLottos();
-
-      this.#output.printPurchasedLottos(user.getPurchasedLottos());
-
-      const winningNumbers = await this.#input.getWinningNumbers();
-      const bonusNumber = await this.#input.getBonusNumber();
-
-      const winningLotto = new WinningLotto(winningNumbers, bonusNumber);
-
-      const checker = new Checker(winningLotto, user.getPurchasedLottos());
-
-      checker.checkAllLottos();
-
-      const result = checker.getResult();
-
-      this.#output.printWinningResults(result);
-
-      const calculator = new Calculator(user.getInvestment(), result);
-
-      const profitRate = calculator.getProfitRate();
-
-      this.#output.printProfitRate(profitRate);
+      await this.#purchaseAndPrintLottos();
+      await this.#inputWinningLotto();
+      this.#checkLottosAndPrintResult();
     } catch (error) {
       this.#output.printError(error.message);
     }
+  }
+
+  async #purchaseAndPrintLottos() {
+    const investment = await this.#input.getInvestment();
+
+    this.#user = new User(investment);
+    this.#user.purchaseLottos();
+
+    this.#output.printPurchasedLottos(this.#user.getPurchasedLottos());
+  }
+
+  async #inputWinningLotto() {
+    const winningNumbers = await this.#input.getWinningNumbers();
+    const bonusNumber = await this.#input.getBonusNumber();
+
+    this.#winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+  }
+
+  #checkLottosAndPrintResult() {
+    const winningResult = this.#checker.checkWinningResult(
+      this.#winningLotto,
+      this.#user.getPurchasedLottos()
+    );
+
+    this.#output.printWinningResults(winningResult);
+
+    const profitRate = this.#calculator.getProfitRate(
+      this.#user.getInvestment(),
+      winningResult
+    );
+    this.#output.printProfitRate(profitRate);
   }
 }
 
