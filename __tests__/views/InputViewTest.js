@@ -1,15 +1,14 @@
 import { LOTTO_CONFIG } from '/src/constants/lottoConfig';
 import { mockQuestions } from '/src/utils/mocks';
-import Input from '/src/views/Input';
+import Input from '/src/views/InputView';
 
-describe('입력 클래스 테스트', () => {
+describe('입력 뷰 클래스 테스트', () => {
   test('구입 금액을 입력 받아 숫자로 변환 후 반환한다.', async () => {
     mockQuestions(['3000']);
 
     const input = new Input();
-    const investment = await input.getInvestment();
 
-    expect(investment).toBe(3000);
+    expect(await input.getPurchasePrice()).toBe(3000);
   });
 
   test('입력된 구입 금액이 양의 정수가 아니라면 예외가 발생한다.', () => {
@@ -18,7 +17,7 @@ describe('입력 클래스 테스트', () => {
     const input = new Input();
 
     expect(async () => {
-      await input.getInvestment();
+      await input.getPurchasePrice();
     }).rejects.toThrow('[ERROR]');
   });
 

@@ -1,14 +1,14 @@
 import { Console } from '@woowacourse/mission-utils';
 import { LOTTO_CONFIG } from '../constants/lottoConfig.js';
 
-class Input {
-  async getInvestment() {
+class InputView {
+  async getPurchasePrice() {
     const input = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
 
-    const investment = Number(input);
-    this.#validateNumberPositive(investment);
+    const purchasePrice = Number(input);
+    this.#validateNumberPositive(purchasePrice);
 
-    return investment;
+    return purchasePrice;
   }
 
   async getWinningNumbers() {
@@ -51,4 +51,4 @@ class Input {
   }
 }
 
-export default Input;
+export default InputView;
