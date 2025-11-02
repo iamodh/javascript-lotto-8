@@ -1,6 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
-import { LOTTO_CONFIG } from '../constants/lottoConfig';
-import Lotto from './Lotto';
+import { LOTTO_CONFIG } from '../constants/lottoConfig.js';
+import Lotto from './Lotto.js';
 
 class User {
   #investment;
