@@ -6,7 +6,7 @@ describe('계산기 클래스 테스트', () => {
     const INVESTMENT = 8000;
     const FIRST_FIFTH_PRIZE = [2, 3, 4, 7, 8, 9];
     const SECOND_FIFTH_PRIZE = [1, 2, 3, 7, 8, 9];
-    const WINNING_RESULT = [
+    const WINNING_STATISTIC = [
       [],
       [],
       [],
@@ -16,9 +16,10 @@ describe('계산기 클래스 테스트', () => {
 
     const PROFIT = PRIZE_AMOUNT[4] * 2;
     const PROFIT_RATE = Math.round((PROFIT / INVESTMENT) * 100 * 10) / 10;
+
     const calculator = new Calculator();
 
-    expect(calculator.getProfitRate(INVESTMENT, WINNING_RESULT)).toBe(
+    expect(calculator.getProfitRate(INVESTMENT, WINNING_STATISTIC)).toBe(
       PROFIT_RATE
     );
   });
