@@ -4,7 +4,7 @@ import WinningLotto from '/src/models/entities/WinningLotto';
 import Checker from '/src/models/services/Checker';
 
 describe('당첨 확인 클래스 테스트', () => {
-  test('사용자가 구매한 모든 로또의 당첨을 확인하고 당첨 결과 배열을 반환한다.', () => {
+  test('사용자가 구매한 모든 로또의 당첨을 확인하고 당첨 통계를 반환한다.', () => {
     const INVESTMENT = 7000;
     const WINNING_NUMBERS = [1, 2, 3, 4, 5, 6];
     const BONUS_NUMBER = 7;
@@ -20,6 +20,7 @@ describe('당첨 확인 클래스 테스트', () => {
     // 3개 번호 일치
     const FIRST_FIFTH_PRIZE = [2, 3, 4, 7, 8, 9];
     const SECOND_FIFTH_PRIZE = [1, 2, 3, 7, 8, 9];
+    // 꽝
     const NO_PRIZE = [7, 8, 9, 10, 11, 12];
 
     mockRandoms([
@@ -32,7 +33,7 @@ describe('당첨 확인 클래스 테스트', () => {
       NO_PRIZE,
     ]);
 
-    const RESULT = [
+    const WINNING_STATISTIC = [
       [FIRST_PRIZE],
       [SECOND_PRIZE],
       [THIRD_PRIZE],
@@ -48,8 +49,8 @@ describe('당첨 확인 클래스 테스트', () => {
 
     const checker = new Checker();
 
-    const winningResult = checker.checkWinningResult(winningLotto, lottos);
-
-    expect(winningResult).toEqual(RESULT);
+    expect(checker.getWinningStatistic(lottos, winningLotto)).toEqual(
+      WINNING_STATISTIC
+    );
   });
 });

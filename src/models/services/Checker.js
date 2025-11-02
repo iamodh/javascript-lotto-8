@@ -1,29 +1,33 @@
 class Checker {
-  checkWinningResult(winningLotto, lottos) {
-    const winningResult = Array.from({ length: 5 }, () => new Array());
+  getWinningStatistic(lottos, winningLotto) {
+    const winningStatistic = Array.from({ length: 5 }, () => new Array());
 
     for (const lotto of lottos) {
-      const prize = this.#checkNumbers(winningLotto, lotto.getNumbers());
+      const prize = this.#checkPrize(lotto, winningLotto);
 
       if (prize !== null && prize <= 5) {
-        winningResult[prize - 1].push(lotto.getNumbers());
+        winningStatistic[prize - 1].push(lotto.getNumbers());
       }
     }
 
-    return winningResult;
+    return winningStatistic;
   }
 
-  #checkNumbers(winningLotto, numbers) {
+  #checkPrize(lotto, winningLotto) {
+    const targetNumbers = lotto.getNumbers();
+    const winningNumbers = winningLotto.getNumbers();
+    const bonusNumber = winningLotto.getBonusNumber();
+
     const intersectoinCounts = this.#getIntersectionCounts(
-      winningLotto.getNumbers(),
-      numbers
+      targetNumbers,
+      winningNumbers
     );
 
     switch (intersectoinCounts) {
       case 6:
         return 1;
       case 5: {
-        if (numbers.includes(winningLotto.getBonusNumber())) {
+        if (targetNumbers.includes(bonusNumber)) {
           return 2;
         }
         return 3;
@@ -37,11 +41,11 @@ class Checker {
     }
   }
 
-  #getIntersectionCounts(numbers1, numbers2) {
-    const sumOfLength = numbers1.length + numbers2.length;
-    const unionLength = new Set([...numbers1, ...numbers2]).size;
+  #getIntersectionCounts(numsA, numsB) {
+    const totalCounts = numsA.length + numsB.length;
+    const unionCounts = new Set([...numsA, ...numsB]).size;
 
-    return sumOfLength - unionLength;
+    return totalCounts - unionCounts;
   }
 }
 
