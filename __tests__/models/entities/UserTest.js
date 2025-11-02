@@ -1,5 +1,5 @@
 import User from '/src/models/entities/User';
-import { LOTTO_CONFIG } from '/src/constants/lottoConfig';
+import LOTTO_CONFIG from '/src/constants/lottoConfig';
 
 describe('사용자 클래스 테스트', () => {
   test('구매 금액이 로또의 가격으로 나누어 떨어지지 않으면 예외가 발생한다.', () => {

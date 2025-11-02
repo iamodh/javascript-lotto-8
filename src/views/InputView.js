@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { LOTTO_CONFIG } from '../constants/lottoConfig.js';
+import LOTTO_CONFIG from '../constants/lottoConfig.js';
 import ERROR_MESSAGES from '/src/constants/errorMessages';
 
 class InputView {

@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import { LOTTO_CONFIG } from '/src/constants/lottoConfig.js';
+import LOTTO_CONFIG from '/src/constants/lottoConfig.js';
 import Lotto from '/src/models/entities/Lotto.js';
 import ERROR_MESSAGES from '/src/constants/errorMessages';
 

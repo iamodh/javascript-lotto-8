@@ -1,3 +1,4 @@
+import LOTTO_CONFIG from '/src/constants/lottoConfig';
 import ERROR_MESSAGES from '/src/constants/errorMessages';
 
 class Lotto {
@@ -10,7 +11,7 @@ class Lotto {
   }
 
   #validateNumbersCount(numbers) {
-    if (numbers.length !== 6) {
+    if (numbers.length !== LOTTO_CONFIG.NUMBERS_COUNT) {
       throw new Error(ERROR_MESSAGES.NUMBERS_INVALID_COUNT);
     }
   }
