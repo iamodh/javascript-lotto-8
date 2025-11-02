@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { PRIZE_AMOUNT, PRIZE_CONDITION } from '../constants/lottoConfig.js';
+import PRIZE_CONFIG from '/src/constants/PrizeConfig';
 
 class OutputView {
   printPurchasedLottos(lottos) {
@@ -17,12 +17,15 @@ class OutputView {
   printWinningStatistic(winningStatistic) {
     Console.print('당첨 통계');
     Console.print('---');
-    for (let i = 4; i >= 0; i--) {
-      Console.print(
-        `${PRIZE_CONDITION[i]} (${PRIZE_AMOUNT[i].toLocaleString()}원) - ${
-          winningStatistic[i].length
-        }개`
-      );
+
+    console.log(winningStatistic);
+
+    for (let rank = PRIZE_CONFIG.COUNT; rank >= 1; rank--) {
+      const condition = PRIZE_CONFIG.CONDITION[rank];
+      const money = PRIZE_CONFIG.MONEY[rank].toLocaleString();
+      const count = winningStatistic[rank].length;
+
+      Console.print(`${condition} (${money}원) - ${count}개`);
     }
   }
 

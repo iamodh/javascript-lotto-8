@@ -43,7 +43,13 @@ describe('출력 뷰 클래스 테스트', () => {
   });
 
   test('당첨 통계를 받아 형식에 맞게 출력한다.', () => {
-    const WINNING_STATISTIC = [[], [], [], [], [[1, 3, 5, 14, 22, 45]]];
+    const WINNING_STATISTIC = {
+      1: [],
+      2: [],
+      3: [],
+      4: [],
+      5: [[1, 3, 5, 14, 22, 45]],
+    };
 
     const logSpy = getLogSpy();
     const output = new Output();

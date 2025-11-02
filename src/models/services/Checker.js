@@ -1,19 +1,27 @@
+import PRIZE_CONFIG from '/src/constants/PrizeConfig';
+
 class Checker {
   getWinningStatistic(lottos, winningLotto) {
-    const winningStatistic = Array.from({ length: 5 }, () => new Array());
+    const winningStatistic = {};
+
+    for (let rank = 1; rank <= PRIZE_CONFIG.COUNT; rank++) {
+      winningStatistic[rank] = [];
+    }
 
     for (const lotto of lottos) {
-      const prize = this.#checkPrize(lotto, winningLotto);
+      const rank = this.#checkRank(lotto, winningLotto);
 
-      if (prize !== null && prize <= 5) {
-        winningStatistic[prize - 1].push(lotto.getNumbers());
+      if (rank !== null && rank <= PRIZE_CONFIG.COUNT) {
+        const numbers = lotto.getNumbers();
+
+        winningStatistic[rank].push(numbers);
       }
     }
 
     return winningStatistic;
   }
 
-  #checkPrize(lotto, winningLotto) {
+  #checkRank(lotto, winningLotto) {
     const targetNumbers = lotto.getNumbers();
     const winningNumbers = winningLotto.getNumbers();
     const bonusNumber = winningLotto.getBonusNumber();

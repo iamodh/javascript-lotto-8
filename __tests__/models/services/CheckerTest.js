@@ -32,14 +32,13 @@ describe('당첨 확인 클래스 테스트', () => {
       SECOND_FIFTH_PRIZE,
       NO_PRIZE,
     ]);
-
-    const WINNING_STATISTIC = [
-      [FIRST_PRIZE],
-      [SECOND_PRIZE],
-      [THIRD_PRIZE],
-      [FOURTH_PRIZE],
-      [FIRST_FIFTH_PRIZE, SECOND_FIFTH_PRIZE],
-    ];
+    const WINNING_STATISTIC = {
+      1: [FIRST_PRIZE],
+      2: [SECOND_PRIZE],
+      3: [THIRD_PRIZE],
+      4: [FOURTH_PRIZE],
+      5: [FIRST_FIFTH_PRIZE, SECOND_FIFTH_PRIZE],
+    };
 
     const user = new User(INVESTMENT);
     user.purchaseLottos();
