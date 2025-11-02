@@ -6,7 +6,7 @@ import { mockRandoms } from '../src/utils/mocks';
 describe('당첨 확인 클래스 테스트', () => {
   test('사용자가 구매한 모든 로또의 당첨을 확인하고 당첨 결과 배열을 반환한다.', () => {
     const INVESTMENT = 7000;
-    const WINNING_LOTTO = [1, 2, 3, 4, 5, 6];
+    const WINNING_NUMBERS = [1, 2, 3, 4, 5, 6];
     const BONUS_NUMBER = 7;
 
     // 6개 번호 일치
@@ -44,12 +44,12 @@ describe('당첨 확인 클래스 테스트', () => {
     user.purchaseLottos();
     const lottos = user.getPurchasedLottos();
 
-    const winningLotto = new WinningLotto([1, 2, 3, 4, 5, 6], 7);
+    const winningLotto = new WinningLotto(WINNING_NUMBERS, BONUS_NUMBER);
 
-    const checker = new Checker(winningLotto, lottos);
+    const checker = new Checker();
 
-    checker.checkAllLottos();
+    const winningResult = checker.checkWinningResult(winningLotto, lottos);
 
-    expect(checker.getResult()).toEqual(RESULT);
+    expect(winningResult).toEqual(RESULT);
   });
 });
