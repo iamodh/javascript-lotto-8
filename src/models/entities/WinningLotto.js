@@ -1,5 +1,5 @@
-import Lotto from '/src/models/entities/Lotto.js';
-import ERROR_MESSAGES from '/src/constants/errorMessages';
+import Lotto from '../entities/Lotto.js';
+import ERROR_MESSAGES from '../../constants/errorMessages.js';
 
 class WinningLotto extends Lotto {
   #bonusNumber;

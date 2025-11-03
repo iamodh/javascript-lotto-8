@@ -1,5 +1,5 @@
-import LOTTO_CONFIG from '/src/constants/lottoConfig';
-import ERROR_MESSAGES from '/src/constants/errorMessages';
+import LOTTO_CONFIG from '../../constants/lottoConfig.js';
+import ERROR_MESSAGES from '../../constants/errorMessages.js';
 
 class Lotto {
   #numbers;

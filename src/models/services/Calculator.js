@@ -1,4 +1,4 @@
-import PRIZE_CONFIG from '/src/constants/PrizeConfig';
+import PRIZE_CONFIG from '../../constants/prizeConfig.js';
 
 class Calculator {
   getProfitRate(purchaseMoney, winningStatistic) {

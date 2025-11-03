@@ -1,9 +1,9 @@
-import Calculator from '/src/models/services/Calculator';
-import Checker from '/src/models/services/Checker';
-import User from '/src/models/entities/User.js';
-import WinningLotto from '/src/models/entities/WinningLotto.js';
-import InputView from '/src/views/InputView.js';
-import OutputView from '/src/views/OutputView.js';
+import Calculator from '../models/services/Calculator.js';
+import Checker from '../models/services/Checker.js';
+import User from '../models/entities/User.js';
+import WinningLotto from '../models/entities/WinningLotto.js';
+import InputView from '../views/InputView.js';
+import OutputView from '../views/OutputView.js';
 
 class LottoController {
   #inputView;
@@ -32,16 +32,21 @@ class LottoController {
 
   async #purchaseAndPrintLottos() {
     const purchasePrice = await this.#inputView.getPurchasePrice();
+    this.#outputView.printNewLine();
 
     this.#user = new User(purchasePrice);
     this.#user.purchaseLottos();
 
     this.#outputView.printPurchasedLottos(this.#user.getPurchasedLottos());
+    this.#outputView.printNewLine();
   }
 
   async #getWinningLotto() {
     const winningNumbers = await this.#inputView.getWinningNumbers();
+    this.#outputView.printNewLine();
+
     const bonusNumber = await this.#inputView.getBonusNumber();
+    this.#outputView.printNewLine();
 
     this.#winningLotto = new WinningLotto(winningNumbers, bonusNumber);
   }

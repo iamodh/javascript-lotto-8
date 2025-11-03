@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import PRIZE_CONFIG from '/src/constants/PrizeConfig';
+import PRIZE_CONFIG from '../constants/prizeConfig.js';
 
 class OutputView {
   printPurchasedLottos(lottos) {
@@ -18,8 +18,6 @@ class OutputView {
     Console.print('당첨 통계');
     Console.print('---');
 
-    console.log(winningStatistic);
-
     for (let rank = PRIZE_CONFIG.COUNT; rank >= 1; rank--) {
       const condition = PRIZE_CONFIG.CONDITION[rank];
       const money = PRIZE_CONFIG.MONEY[rank].toLocaleString();
@@ -35,6 +33,10 @@ class OutputView {
 
   printError(error) {
     Console.print(error);
+  }
+
+  printNewLine() {
+    Console.print('');
   }
 }
 
