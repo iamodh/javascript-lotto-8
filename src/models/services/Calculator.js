@@ -1,12 +1,12 @@
 import PRIZE_CONFIG from '../../constants/prizeConfig.js';
 
 class Calculator {
-  getProfitRate(purchaseMoney, winningStatistic) {
+  getProfitRate(purchasePrice, winningStatistic) {
     const profit = this.#calculateProfit(winningStatistic);
     if (profit === 0) return 0;
 
     // 소숫점 반환 결과를 Number로 저장하기 위함
-    const profitRate = Math.round((profit / purchaseMoney) * 100 * 10) / 10;
+    const profitRate = Math.round((profit / purchasePrice) * 100 * 10) / 10;
 
     return profitRate;
   }

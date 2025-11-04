@@ -1,38 +1,24 @@
-import { Random } from '@woowacourse/mission-utils';
 import LOTTO_CONFIG from '../../constants/lottoConfig.js';
-import Lotto from '../entities/Lotto.js';
 import ERROR_MESSAGES from '../../constants/errorMessages.js';
 
 class User {
   #purchasePrice;
   #lottos = [];
 
-  constructor(purchasePrice) {
-    this.#validatePrice(purchasePrice);
+  constructor(purchasePrice, lottos) {
     this.#purchasePrice = purchasePrice;
+    this.#valiadtePurchasePrice(purchasePrice);
+    this.#lottos = lottos;
   }
 
-  #validatePrice(purchasePrice) {
+  #valiadtePurchasePrice(purchasePrice) {
     if (purchasePrice % LOTTO_CONFIG.PRICE !== 0) {
       throw new Error(ERROR_MESSAGES.INVALID_PRICE);
     }
   }
 
-  purchaseLottos() {
-    const quantity = this.#purchasePrice / LOTTO_CONFIG.PRICE;
-    for (let i = 0; i < quantity; i++) {
-      const randomNumbers = this.#getRandomLottoNumbers();
-
-      this.#lottos.push(new Lotto(randomNumbers));
-    }
-  }
-
-  #getRandomLottoNumbers() {
-    return Random.pickUniqueNumbersInRange(
-      LOTTO_CONFIG.NUMBER_RANGE_FROM,
-      LOTTO_CONFIG.NUMBER_RANGE_TO,
-      LOTTO_CONFIG.NUMBERS_COUNT
-    );
+  setPurchasedLottos(lottos) {
+    this.#lottos = lottos;
   }
 
   getPurchasedLottos() {

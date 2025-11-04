@@ -1,15 +1,14 @@
+import Lotto from '../../src/models/entities/Lotto';
 import User from '/src/models/entities/User';
 import { getLogSpy, mockRandoms } from '/src/utils/mocks';
 import Output from '/src/views/OutputView';
 
 describe('출력 뷰 클래스 테스트', () => {
   test('구매한 로또들을 받아 각 번호를 오름차순으로 정렬한 후, 형식에 맞게 출력한다.', () => {
-    const PURCHASED_PRICE = 8000;
     const output = new Output();
-    const user = new User(PURCHASED_PRICE);
     const logSpy = getLogSpy();
 
-    mockRandoms([
+    const NUMBERS = [
       [8, 21, 23, 41, 42, 43],
       [3, 5, 11, 16, 32, 38],
       [7, 11, 16, 35, 36, 44],
@@ -18,7 +17,11 @@ describe('출력 뷰 클래스 테스트', () => {
       [7, 11, 30, 40, 42, 43],
       [2, 13, 22, 32, 38, 45],
       [1, 3, 5, 14, 22, 45],
-    ]);
+    ];
+    const lottos = [];
+    for (number of NUMBERS) {
+      lottos.push(new Lotto(number));
+    }
 
     const logs = [
       '8개를 구매했습니다.',
@@ -32,8 +35,6 @@ describe('출력 뷰 클래스 테스트', () => {
       '[1, 3, 5, 14, 22, 45]',
     ];
 
-    user.purchaseLottos();
-    const lottos = user.getPurchasedLottos();
     output.printPurchasedLottos(lottos);
 
     // logSpy가 log를 포함한 string을 매개변수로 호출되었는지 테스트

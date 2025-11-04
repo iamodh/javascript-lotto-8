@@ -21,6 +21,16 @@ describe('입력 뷰 클래스 테스트', () => {
     }).rejects.toThrow('[ERROR]');
   });
 
+  test('입력된 구입 금액이 로또의 가격으로 나누어 떨어지지 않으면 예외가 발생한다.', () => {
+    mockQuestions(['3200']);
+
+    const input = new Input();
+
+    expect(async () => {
+      await input.getPurchasePrice();
+    }).rejects.toThrow('[ERROR]');
+  });
+
   test('당첨 로또의 번호들을 입력 받아 숫자 배열로 변환 후 반환한다.', async () => {
     mockQuestions(['1,2,3,4,5,6']);
 

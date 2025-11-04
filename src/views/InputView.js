@@ -8,6 +8,7 @@ class InputView {
 
     const purchasePrice = Number(input.trim());
     this.#validateNumberPositive(purchasePrice);
+    this.#valiadtePurchasePrice(purchasePrice);
 
     return purchasePrice;
   }
@@ -46,6 +47,12 @@ class InputView {
       number > LOTTO_CONFIG.NUMBER_RANGE_TO
     ) {
       throw new Error(ERROR_MESSAGES.NUMBER_NOT_IN_RANGE);
+    }
+  }
+
+  #valiadtePurchasePrice(purchasePrice) {
+    if (purchasePrice % LOTTO_CONFIG.PRICE !== 0) {
+      throw new Error(ERROR_MESSAGES.INVALID_PRICE);
     }
   }
 }

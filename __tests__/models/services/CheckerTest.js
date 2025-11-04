@@ -2,10 +2,11 @@ import { mockRandoms } from '/src/utils/mocks';
 import User from '/src/models/entities/User';
 import WinningLotto from '/src/models/entities/WinningLotto';
 import Checker from '/src/models/services/Checker';
+import Lotto from '../../../src/models/entities/Lotto';
 
 describe('당첨 확인 클래스 테스트', () => {
   test('사용자가 구매한 모든 로또의 당첨을 확인하고 당첨 통계를 반환한다.', () => {
-    const INVESTMENT = 7000;
+    const PURCHASE_PRICE = 7000;
     const WINNING_NUMBERS = [1, 2, 3, 4, 5, 6];
     const BONUS_NUMBER = 7;
 
@@ -23,7 +24,7 @@ describe('당첨 확인 클래스 테스트', () => {
     // 꽝
     const NO_PRIZE = [7, 8, 9, 10, 11, 12];
 
-    mockRandoms([
+    const NUMBERS = [
       FIRST_PRIZE,
       SECOND_PRIZE,
       THIRD_PRIZE,
@@ -31,7 +32,12 @@ describe('당첨 확인 클래스 테스트', () => {
       FIRST_FIFTH_PRIZE,
       SECOND_FIFTH_PRIZE,
       NO_PRIZE,
-    ]);
+    ];
+    const lottos = [];
+    for (number of NUMBERS) {
+      lottos.push(new Lotto(number));
+    }
+
     const WINNING_STATISTIC = {
       1: [FIRST_PRIZE],
       2: [SECOND_PRIZE],
@@ -39,10 +45,6 @@ describe('당첨 확인 클래스 테스트', () => {
       4: [FOURTH_PRIZE],
       5: [FIRST_FIFTH_PRIZE, SECOND_FIFTH_PRIZE],
     };
-
-    const user = new User(INVESTMENT);
-    user.purchaseLottos();
-    const lottos = user.getPurchasedLottos();
 
     const winningLotto = new WinningLotto(WINNING_NUMBERS, BONUS_NUMBER);
 
