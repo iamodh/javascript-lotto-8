@@ -1,44 +1,50 @@
-import Calculator from '../models/services/Calculator.js';
-import Checker from '../models/services/Checker.js';
 import User from '../models/entities/User.js';
 import WinningLotto from '../models/entities/WinningLotto.js';
-import InputView from '../views/InputView.js';
-import OutputView from '../views/OutputView.js';
 
 class LottoController {
   #inputView;
   #outputView;
   #checker;
   #calculator;
-  #user;
-  #winningLotto;
+  #lottoFactory;
 
-  constructor() {
-    this.#inputView = new InputView();
-    this.#outputView = new OutputView();
-    this.#checker = new Checker();
-    this.#calculator = new Calculator();
+  constructor(inputView, outputView, checker, calculator, lottoFactory) {
+    this.#inputView = inputView;
+    this.#outputView = outputView;
+    this.#checker = checker;
+    this.#calculator = calculator;
+    this.#lottoFactory = lottoFactory;
   }
 
   async start() {
     try {
-      await this.#purchaseAndPrintLottos();
-      await this.#getWinningLotto();
-      this.#checkAndPrintWinningStatistic();
+      const user = await this.#purchaseLottos();
+
+      this.#outputView.printPurchasedLottos(user.getPurchasedLottos());
+      this.#outputView.printNewLine();
+
+      const winningLotto = await this.#getWinningLotto();
+
+      const { winningStatistic, profitRate } = this.#getResult(
+        user,
+        winningLotto
+      );
+
+      this.#outputView.printWinningStatistic(winningStatistic);
+      this.#outputView.printProfitRate(profitRate);
     } catch (error) {
       this.#outputView.printError(error.message);
     }
   }
 
-  async #purchaseAndPrintLottos() {
+  async #purchaseLottos() {
     const purchasePrice = await this.#inputView.getPurchasePrice();
     this.#outputView.printNewLine();
 
-    this.#user = new User(purchasePrice);
-    this.#user.purchaseLottos();
+    const purchasedLottos = this.#lottoFactory.purchaseLottos(purchasePrice);
+    const user = new User(purchasePrice, purchasedLottos);
 
-    this.#outputView.printPurchasedLottos(this.#user.getPurchasedLottos());
-    this.#outputView.printNewLine();
+    return user;
   }
 
   async #getWinningLotto() {
@@ -48,22 +54,21 @@ class LottoController {
     const bonusNumber = await this.#inputView.getBonusNumber();
     this.#outputView.printNewLine();
 
-    this.#winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+    return new WinningLotto(winningNumbers, bonusNumber);
   }
 
-  #checkAndPrintWinningStatistic() {
+  #getResult(user, winningLotto) {
     const winningStatistic = this.#checker.getWinningStatistic(
-      this.#user.getPurchasedLottos(),
-      this.#winningLotto
+      user.getPurchasedLottos(),
+      winningLotto
     );
-
-    this.#outputView.printWinningStatistic(winningStatistic);
 
     const profitRate = this.#calculator.getProfitRate(
-      this.#user.getPurchasePrice(),
+      user.getPurchasePrice(),
       winningStatistic
     );
-    this.#outputView.printProfitRate(profitRate);
+
+    return { winningStatistic, profitRate };
   }
 }
 
