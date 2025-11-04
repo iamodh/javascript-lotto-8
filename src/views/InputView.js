@@ -35,7 +35,7 @@ class InputView {
 
   #validateNumberPositive(number) {
     if (Number.isNaN(number) || !Number.isInteger(number) || number === 0) {
-      throw new Error(ERROR_MESSAGES.NUMBER_NOT_POSIRIVE);
+      throw new Error(ERROR_MESSAGES.NUMBER_NOT_POSITIVE);
     }
   }
 
